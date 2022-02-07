@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AddBook from "./AddBook/AddBook";
 
 class Books extends Component {
 
@@ -47,10 +48,15 @@ class Books extends Component {
         ]
     }
 
+    addBookHandler = (book) => {
+        console.log("Nom du livre à ajouter : " + book.name);
+        
+    }
+
     render() {
         return (
             <>
-                <table className="table table-center">
+                <table className="table text-center">
                     <thead>
                         <tr>
                             <th>Titre</th>
@@ -62,10 +68,27 @@ class Books extends Component {
                         </tr>
                     </thead>
                     <tbody>
-
+                    {
+                        this.state.books.map( book => {
+                            return (
+                                <tr key={book.id}>
+                                    <td>{book.name}</td>
+                                    <td>{book.author}</td>
+                                    <td>{book.year}</td>
+                                    <td>{book.price}</td>
+                                    <td>{book.country}</td>
+                                    <td><button className="btn btn-primary">Modifier</button></td>
+                                    <td><button className="btn btn-danger">Supprimer</button></td>
+                                </tr>
+                            )
+                        })
+                    }
                     </tbody>
                 </table>
+                <AddBook addBookAction={(book) => this.addBookHandler(book)} />
             </>
         )
     }
 }
+
+export default Books;
