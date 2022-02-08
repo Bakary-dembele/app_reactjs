@@ -14,35 +14,60 @@ class AddBook extends Component {
                         <input type="text" className="form-control" id="name" name="name"
                         value={this.props.values.name}
                         onChange={this.props.handleChange}
+                        onBlur={this.props.handleBlur}
                          />
+                         {
+                            this.props.errors.name && this.props.touched.name &&
+                            <span style={{color: "red"}}>{this.props.errors.name}</span>
+                         }
                     </div>
                     <div className="mb-3">
                         <label htmlFor="author" className="form-label">Auteur :</label>
                         <input type="text" className="form-control" id="author" name="author"
                         value={this.props.values.author}
                         onChange={this.props.handleChange}
+                        onBlur={this.props.handleBlur}
                          />
+                         {
+                            this.props.errors.author && this.props.touched.author &&
+                            <span style={{color: "red"}}>{this.props.errors.author}</span>
+                         }
                     </div>
                     <div className="mb-3">
                         <label htmlFor="year" className="form-label">Année :</label>
                         <input type="number" className="form-control" id="year" name="year"
                         value={this.props.values.year}
                         onChange={this.props.handleChange}
+                        onBlur={this.props.handleBlur}
                          />
+                         {
+                            this.props.errors.year && this.props.touched.year &&
+                            <span style={{color: "red"}}>{this.props.errors.year}</span>
+                         }
                     </div>
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label">Prix :</label>
                         <input type="number" className="form-control" id="price" name="price"
                         value={this.props.values.price}
                         onChange={this.props.handleChange}
+                        onBlur={this.props.handleBlur}
                          />
+                         {
+                            this.props.errors.price && this.props.touched.price &&
+                            <span style={{color: "red"}}>{this.props.errors.price}</span>
+                         }
                     </div>
                     <div className="mb-3">
                         <label htmlFor="country" className="form-label">Pays :</label>
                         <input type="text" className="form-control" id="country" name="country"
                         value={this.props.values.country}
                         onChange={this.props.handleChange}
+                        onBlur={this.props.handleBlur}
                          />
+                         {
+                            this.props.errors.country && this.props.touched.country &&
+                            <span style={{color: "red"}}>{this.props.errors.country}</span>
+                         }
                     </div>
                     <button type="submit" className="btn btn-primary"
                     onClick={this.props.handleSubmit}>Ajouter</button>
@@ -76,8 +101,9 @@ export default withFormik({
                     .required("Le nom du pays est requis")
         
     }),
-    handleSubmit: (values, {props}) => {
+    handleSubmit: (values, {props, resetForm}) => {
         //console.log(values);
         props.addBookAction(values);
+        resetForm();
     }
 }) (AddBook);
