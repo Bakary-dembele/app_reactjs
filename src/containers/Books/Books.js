@@ -7,7 +7,7 @@ class Books extends Component {
 
     state = {
         books: [],
-        bookToModify: 1
+        bookToModify: 0
     }
 
     componentDidMount = () => {
@@ -50,7 +50,21 @@ class Books extends Component {
         console.log("index du livre : " + index)
         const books = [...this.state.books];
         books.splice(index, 1);
-        this.setState({books: books})
+        this.setState({books})
+    }
+
+    editBookHandler = (id) => {
+        this.setState({bookToModify: id});
+    }
+
+    modifyBookHandler = (book) => {
+        console.log("Livre à modifier : " + book.name);
+        const index = this.state.books.findIndex(b => {
+            return b.id === book.id
+        });
+        const books = [...this.state.books];
+        books[index] = book;
+        this.setState({books, bookToModify: 0})
     }
 
     render() {
@@ -78,14 +92,14 @@ class Books extends Component {
                                         <td>{book.year}</td>
                                         <td>{book.price}</td>
                                         <td>{book.country}</td>
-                                        <td><button className="btn btn-primary">Modifier</button></td>
+                                        <td><button onClick={() => this.editBookHandler(book.id)} className="btn btn-primary">Modifier</button></td>
                                         <td><button onClick={() => this.deleteBookHandler(book.id)} className="btn btn-danger">Supprimer</button></td>
                                     </tr>
                                 )
                             } else {
                                 return (
                                     <tr key={book.id}>
-                                        <ModifyBook {...book} />
+                                        <ModifyBook modifyBook={(book) => this.modifyBookHandler(book)} {...book} />
                                     </tr>
                                 )
                             }
