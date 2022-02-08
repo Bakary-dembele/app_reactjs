@@ -14,15 +14,15 @@ class ModifyBook extends Component {
     }
 
     componentDidMount = () => {
-        // this.setState({book: {
-        //     id: this.props.id,
-        //     name: this.props.name,
-        //     author: this.props.author,
-        //     year: this.props.year,
-        //     price: this.props.price,
-        //     country: this.props.country
-        // }})
-        this.setState({book: {...this.props}})
+        this.setState({book: {
+            id: this.props.id,
+            name: this.props.name,
+            author: this.props.author,
+            year: this.props.year,
+            price: this.props.price,
+            country: this.props.country
+        }})
+        // this.setState({book: {...this.props}})
     }
 
     handleSubmit = () => {
